@@ -4,11 +4,17 @@ import './index.css';
 import App from './App.js';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import DevTools from './DevTools';
+import { createLogger } from 'redux-logger'
 import { reducer } from './reducer.js';
 import { addComment } from './actions.js';
 
-const store = createStore(reducer);
+const logger = createLogger();
+const store = createStore(
+	reducer,
+	DevTools.instrument()
+);
 
 ReactDOM.render(
 	<Provider store={store}>
